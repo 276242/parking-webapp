@@ -19,11 +19,17 @@ const Home: React.FC = () => {
       <nav>
         <Link to="/scan">📸 Scan QR Code</Link>
         <Link to="/history">📜 Parking History</Link>
+        <Link to="/map">🗺️ View Parking Map</Link> 
       </nav>
 
-      <button>
-        <Link to="/scan" style={{ color: 'white', textDecoration: 'none' }}>Scan Now</Link>
-      </button>
+      <div style={{ marginTop: '20px' }}>
+        <button style={{ marginRight: '10px' }}>
+          <Link to="/scan" style={{ color: 'white', textDecoration: 'none' }}>Scan Now</Link>
+        </button>
+        <button>
+          <Link to="/map" style={{ color: 'white', textDecoration: 'none' }}>View Map</Link> 
+        </button>
+      </div>
     </div>
   );
 };

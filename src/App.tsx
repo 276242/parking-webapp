@@ -4,6 +4,7 @@ import Home from './home/Home';
 import QRScanner from './qrscanner/QRScanner';
 import ParkingSpotDetails from './parking/ParkingSpotDetails';
 import ParkingHistory from './parking/ParkingHistory';
+import ParkingMap from './parking/ParkingMap'; // Import the map component
 import './App.css';
 
 const App: React.FC = () => {
@@ -15,6 +16,7 @@ const App: React.FC = () => {
           <Route path="/scan" element={<QRScanner />} />
           <Route path="/details/:id" element={<ParkingSpotDetails />} />
           <Route path="/history" element={<ParkingHistory />} />
+          <Route path="/map" element={<ParkingMap />} />
         </Routes>
       </div>
     </Router>
