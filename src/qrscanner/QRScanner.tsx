@@ -19,16 +19,16 @@ const QRScanner: React.FC = () => {
 
   return (
     <div className="container">
-      <h2>Scan QR Code</h2>
+      <h2>📸 Scan QR Code</h2>
       <div className="qr-container">
         <QrScanner
           delay={300}
           onError={handleError}
           onScan={handleScan}
-          style={{ width: '100%' }}
+          style={{ width: '80%', maxWidth: '400px' }}
         />
       </div>
-      {scanResult && <p>Scanned QR Code: {scanResult}</p>}
+      {scanResult && <p>✅ Scanned: {scanResult}</p>}
     </div>
   );
 };

@@ -25,14 +25,18 @@ const ParkingHistory: React.FC = () => {
 
   return (
     <div className="container">
-      <h2>Parking History</h2>
-      <ul>
-        {history.map((entry) => (
-          <li key={entry.id}>
-            📅 <strong>{entry.parkedAt}</strong> - 🏷 <strong>Spot:</strong> {entry.spotId}
-          </li>
-        ))}
-      </ul>
+      <h2>📜 Parking History</h2>
+      {history.length === 0 ? (
+        <p>No history found.</p>
+      ) : (
+        <ul>
+          {history.map((entry) => (
+            <li key={entry.id}>
+              📅 <strong>{entry.parkedAt}</strong> - 🏷 <strong>Spot:</strong> {entry.spotId}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
