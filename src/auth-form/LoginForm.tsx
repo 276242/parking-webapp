@@ -22,7 +22,7 @@ function LoginForm() {
     try {
       const response = await apiClient.login(values);
       if (response && response.token) {
-        navigate('/history');
+        navigate('/menu');
       }
     } catch (error) {
       formikHelpers.setFieldError('username', 'Invalid username or password');
