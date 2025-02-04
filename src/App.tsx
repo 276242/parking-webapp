@@ -23,7 +23,6 @@ function App() {
             <Route path="/" element={<Navigate to="/menu" />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Routes>
-        <NavBar />
       </AuthProvider>
     </ApiProvider>
   );

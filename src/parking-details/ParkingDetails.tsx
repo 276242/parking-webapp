@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ParkingClient } from '../api/ParkingClient';
+import { updateAvailability, getAvailability } from '../firebase';
 import './ParkingDetails.css';
 
 interface ParkingSpotDetails {
@@ -18,11 +19,22 @@ const ParkingDetails: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!spotId) {
+      console.error("Spot ID is missing");
+      return;
+    }
+
     const fetchParkingDetails = async () => {
       try {
         const parkingClient = new ParkingClient();
-        const response = await parkingClient.getParkingSpot(spotId || "");
+        const response = await parkingClient.getParkingSpot(spotId);
         setDetails(response);
+
+        await getAvailability(spotId, (status) => {
+          setDetails((prevDetails) => {
+            return prevDetails ? { ...prevDetails, available: status } : null;
+          });
+        });
       } catch (error) {
         console.error("Error fetching parking details:", error);
       } finally {
@@ -32,6 +44,26 @@ const ParkingDetails: React.FC = () => {
 
     fetchParkingDetails();
   }, [spotId]);
+
+  const markAsOccupied = async (spotId: string) => {
+    if (!spotId) {
+      console.error("Spot ID is missing");
+      return;
+    }
+
+    try {
+      await updateAvailability(spotId, false);
+
+      setDetails((prevDetails) => {
+        if (prevDetails) {
+          return { ...prevDetails, available: false };
+        }
+        return prevDetails;
+      });
+    } catch (error) {
+      console.error("Error marking parking spot as occupied:", error);
+    }
+  };
 
   if (loading) return <p>Loading parking details...</p>;
   if (!details) return <p>Parking spot not found.</p>;
@@ -45,8 +77,18 @@ const ParkingDetails: React.FC = () => {
       <p><strong>QR Code:</strong> {details.qrCode}</p>
       <p>
         <strong>Availability:</strong>{' '}
-        {details.available ? <span className="available">Available</span> : <span className="unavailable">Occupied</span>}
+        {details.available ? (
+          <span className="available">Available</span>
+        ) : (
+          <span className="unavailable">Occupied</span>
+        )}
       </p>
+      <button
+        onClick={() => spotId && markAsOccupied(spotId)}
+        disabled={!details.available}
+      >
+        Mark as Occupied
+      </button>
     </div>
   );
 };
