@@ -1,40 +1,123 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home, Clock, Scan, LogIn } from 'lucide-react';
+import { Box, Grid, Paper, Typography } from '@mui/material';
+const parkingImage = require('../assets/parking2.jpeg');
 
 const MenuPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-6">Parking Spot Finder</h1>
-      
-      <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-        {/* Home */}
-        <div className="p-4 bg-white shadow-md rounded-2xl flex flex-col items-center">
-          <Home className="w-10 h-10 mb-2 text-gray-700" />
-          <Link to="/" className="text-lg font-semibold text-blue-600 hover:underline">Home</Link>
-        </div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="flex-start"
+      minHeight="100vh"
+      bgcolor="black"
+      p={4}
+      pt={2}
+    >
+      <Box textAlign="center" mb={4}>
+        <Typography variant="h4" fontWeight="bold" color="white" fontSize="4rem">
+          Welcome!
+        </Typography>
+        <Typography variant="body1" color="gray" fontSize="2rem">
+          Find your perfect parking spot easily.
+        </Typography>
+      </Box>
 
-        {/* Parking History */}
-        <div className="p-4 bg-white shadow-md rounded-2xl flex flex-col items-center">
-          <Clock className="w-10 h-10 mb-2 text-gray-700" />
-          <Link to="/history" className="text-lg font-semibold text-blue-600 hover:underline">History</Link>
-        </div>
+      <Box
+        component="img"
+        src={parkingImage}
+        alt="Parking Spot"
+        sx={{
+          width: '100%',
+          maxWidth: '600px',
+          borderRadius: '15px',
+          boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.5)',
+          objectFit: 'cover',
+          mb: 4,
+        }}
+      />
 
-        {/* QR Scanner */}
-        <div className="p-4 bg-white shadow-md rounded-2xl flex flex-col items-center">
-          <Scan className="w-10 h-10 mb-2 text-gray-700" />
-          <Link to="/scan" className="text-lg font-semibold text-blue-600 hover:underline">Scan QR</Link>
-        </div>
+      <Box display="flex" justifyContent="center" gap={4}>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 3,
+              textAlign: 'center',
+              borderRadius: 3,
+              bgcolor: 'white',
+              '&:hover': { bgcolor: '#ddd' },
+              minWidth: '120px',
+            }}
+          >
+            <Home size={40} color="black" />
+            <Typography variant="h6" fontWeight="bold" color="black">
+              Home
+            </Typography>
+          </Paper>
+        </Link>
 
-        {/* Login */}
-        <div className="p-4 bg-white shadow-md rounded-2xl flex flex-col items-center">
-          <LogIn className="w-10 h-10 mb-2 text-gray-700" />
-          <Link to="/login" className="text-lg font-semibold text-blue-600 hover:underline">Login</Link>
-        </div>
-      </div>
-    </div>
+        <Link to="/history" style={{ textDecoration: 'none' }}>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 3,
+              textAlign: 'center',
+              borderRadius: 3,
+              bgcolor: 'white',
+              '&:hover': { bgcolor: '#ddd' },
+              minWidth: '120px',
+            }}
+          >
+            <Clock size={40} color="black" />
+            <Typography variant="h6" fontWeight="bold" color="black">
+              History
+            </Typography>
+          </Paper>
+        </Link>
+
+        <Link to="/scan" style={{ textDecoration: 'none' }}>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 3,
+              textAlign: 'center',
+              borderRadius: 3,
+              bgcolor: 'white',
+              '&:hover': { bgcolor: '#ddd' },
+              minWidth: '120px',
+            }}
+          >
+            <Scan size={40} color="black" />
+            <Typography variant="h6" fontWeight="bold" color="black">
+              Scan QR
+            </Typography>
+          </Paper>
+        </Link>
+
+        <Link to="/login" style={{ textDecoration: 'none' }}>
+          <Paper
+            elevation={3}
+            sx={{
+              p: 3,
+              textAlign: 'center',
+              borderRadius: 3,
+              bgcolor: 'white',
+              '&:hover': { bgcolor: '#ddd' },
+              minWidth: '120px',
+            }}
+          >
+            <LogIn size={40} color="black" />
+            <Typography variant="h6" fontWeight="bold" color="black">
+              Login
+            </Typography>
+          </Paper>
+        </Link>
+      </Box>
+    </Box>
   );
 };
 
 export default MenuPage;
-export {};

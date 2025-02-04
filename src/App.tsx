@@ -20,7 +20,7 @@ function App() {
             <Route path="/details/:spotId" element={<ParkingDetails />} />
             <Route path="/scan" element={<QRScanner />} />
             <Route path="/menu" element={<MenuPage />} />
-            <Route path="/" element={<Navigate to="/menu" />} />
+            <Route path="/" element={<Navigate to="/login" />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Routes>
       </AuthProvider>
