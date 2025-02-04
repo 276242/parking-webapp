@@ -1,8 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useApi } from "../api/ApiProvider";
-import { jwtDecode } from "jwt-decode";
-
+import { ParkingClient } from "../api/ParkingClient";
+import { jwtDecode } from 'jwt-decode';
 interface User {
   id: string;
   email: string;
@@ -19,7 +18,7 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
-  const apiClient = useApi();
+  const apiClient = new ParkingClient();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
