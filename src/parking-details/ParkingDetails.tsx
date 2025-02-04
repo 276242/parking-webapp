@@ -104,14 +104,24 @@ const ParkingDetails: React.FC = () => {
         )}
       </p>
       <button
-        onClick={() => spotId && markAsOccupied(spotId)}
+        onClick={() => {
+          if (spotId) {
+        markAsOccupied(spotId);
+        window.history.pushState({}, '', `/api/parkingspots/${spotId}/reserve`);
+          }
+        }}
         disabled={!details.available}
       >
         Mark as Occupied
       </button>
       
       <button
-        onClick={() => spotId && markAsAvailable(spotId)}
+        onClick={() => {
+          if (spotId) {
+        markAsAvailable(spotId);
+        window.history.pushState({}, '', `/api/parkingspots/${spotId}/release`);
+          }
+        }}
         disabled={details.available}
       >
         Mark as Available
