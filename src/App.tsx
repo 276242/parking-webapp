@@ -7,7 +7,7 @@ import LoginForm from './auth-form/LoginForm';
 import ParkingHistory from './parking-history/ParkingHistory';
 import ParkingDetails from './parking-details/ParkingDetails';
 import QRScanner from './qr-scanner/QRScanner';
-
+import MenuPage from './menu//MenuPage';
 
 function App() {
   return (
@@ -19,9 +19,11 @@ function App() {
             <Route path="/history" element={<ParkingHistory />} />
             <Route path="/details/:spotId" element={<ParkingDetails />} />
             <Route path="/scan" element={<QRScanner />} />
-            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/menu" element={<MenuPage />} />
+            <Route path="/" element={<Navigate to="/menu" />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />
           </Routes>
+        <NavBar />
       </AuthProvider>
     </ApiProvider>
   );
