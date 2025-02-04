@@ -1,0 +1,29 @@
+.parking-details-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .parking-details-container h2 {
+    color: #007bff;
+    margin-bottom: 15px;
+  }
+  
+  .parking-details-container p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  .available {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .unavailable {
+    color: red;
+    font-weight: bold;
+  }
+  

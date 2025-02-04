@@ -6,7 +6,7 @@ import NavBar from './menu-app-bar/NavBar';
 import LoginForm from './auth-form/LoginForm';
 import ParkingHistory from './parking-history/ParkingHistory';
 import ParkingDetails from './parking-details/ParkingDetails';
-import QRScanner from './qr-scanner/QRScanner'; // fix the qr code
+import QRScanner from './qr-scanner/QRScanner';
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
           <Routes>
             <Route path="/login" element={<LoginForm />} />
             <Route path="/history" element={<ParkingHistory />} />
-            <Route path="/details/:parkingSpotId" element={<ParkingDetails />} />
+            <Route path="/details/:spotId" element={<ParkingDetails />} />
             <Route path="/scan" element={<QRScanner />} />
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="*" element={<h1>404 - Page Not Found</h1>} />

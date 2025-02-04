@@ -1,50 +1,52 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { AuthContext } from "../auth-form/AuthContext";
-import { useApi } from "../api/ApiProvider";
-import { getAvailability } from "./FirebaseService";
-import MapComponent from "./MapComponent";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { ParkingClient } from '../api/ParkingClient';
+import './ParkingDetails.css';
 
-const ParkingDetails = () => {
-  const { parkingSpotId } = useParams();
-  const { user } = useContext(AuthContext)!;
-  const navigate = useNavigate();
-  const apiClient = useApi();
+interface ParkingSpotDetails {
+  id: number;
+  level: string;
+  sector: string;
+  spotNumber: string;
+  qrCode: string;
+  available: boolean;
+}
 
-  const [spot, setSpot] = useState<any>(null);
-  const [availability, setAvailability] = useState<boolean | null>(null);
+const ParkingDetails: React.FC = () => {
+  const { spotId } = useParams<{ spotId: string }>();
+  const [details, setDetails] = useState<ParkingSpotDetails | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
-      navigate(`/login?redirect=/details/${parkingSpotId}`);
-    } else {
-      apiClient.getParkingSpot(parkingSpotId!).then(setSpot);
-      getAvailability(parkingSpotId!, setAvailability);
-    }
-  }, [parkingSpotId, user, navigate, apiClient]);
+    const fetchParkingDetails = async () => {
+      try {
+        const parkingClient = new ParkingClient();
+        const response = await parkingClient.getParkingSpot(spotId || "");
+        setDetails(response);
+      } catch (error) {
+        console.error("Error fetching parking details:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const handleConfirm = async () => {
-    try {
-      await apiClient.confirmParking(parkingSpotId!);
-      alert("Parking confirmed!");
-    } catch (error) {
-      console.error("Error confirming parking:", error);
-      alert("Failed to confirm parking.");
-    }
-  };
-  
+    fetchParkingDetails();
+  }, [spotId]);
 
-  if (!spot) return <p>Loading...</p>;
+  if (loading) return <p>Loading parking details...</p>;
+  if (!details) return <p>Parking spot not found.</p>;
 
   return (
-    <div>
+    <div className="parking-details-container">
       <h2>Parking Spot Details</h2>
-      <p><strong>Location:</strong> {spot.location}</p>
-      <p><strong>Level:</strong> {spot.level}</p>
-      <p><strong>Number:</strong> {spot.number}</p>
-      <p><strong>Availability:</strong> {availability ? "Available" : "Occupied"}</p>
-      <MapComponent latitude={spot.latitude} longitude={spot.longitude} />
-      <button onClick={handleConfirm}>Confirm Parking</button>
+      <p><strong>Level:</strong> {details.level}</p>
+      <p><strong>Sector:</strong> {details.sector}</p>
+      <p><strong>Spot Number:</strong> {details.spotNumber}</p>
+      <p><strong>QR Code:</strong> {details.qrCode}</p>
+      <p>
+        <strong>Availability:</strong>{' '}
+        {details.available ? <span className="available">Available</span> : <span className="unavailable">Occupied</span>}
+      </p>
     </div>
   );
 };
