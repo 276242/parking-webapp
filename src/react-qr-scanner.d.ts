@@ -1,5 +1,5 @@
 declare module 'react-qr-scanner' {
-    const QrScanner: any;
-    export default QrScanner;
+    const QrReader: any;
+    export { QrReader };
   }
   
