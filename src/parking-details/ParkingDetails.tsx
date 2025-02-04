@@ -65,6 +65,26 @@ const ParkingDetails: React.FC = () => {
     }
   };
 
+  const markAsAvailable = async (spotId: string) => {
+    if (!spotId) {
+      console.error("Spot ID is missing");
+      return;
+    }
+
+    try {
+      await updateAvailability(spotId, true);
+
+      setDetails((prevDetails) => {
+        if (prevDetails) {
+          return { ...prevDetails, available: true };
+        }
+        return prevDetails;
+      });
+    } catch (error) {
+      console.error("Error marking parking spot as available:", error);
+    }
+  };
+
   if (loading) return <p>Loading parking details...</p>;
   if (!details) return <p>Parking spot not found.</p>;
 
@@ -88,6 +108,13 @@ const ParkingDetails: React.FC = () => {
         disabled={!details.available}
       >
         Mark as Occupied
+      </button>
+      
+      <button
+        onClick={() => spotId && markAsAvailable(spotId)}
+        disabled={details.available}
+      >
+        Mark as Available
       </button>
     </div>
   );
