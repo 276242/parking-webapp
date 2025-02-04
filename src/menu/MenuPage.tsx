@@ -12,7 +12,7 @@ const MenuPage = () => {
       alignItems="center"
       justifyContent="flex-start"
       minHeight="100vh"
-      bgcolor="black"
+      bgcolor="rgba(0, 0, 0, 0.9)"
       p={4}
       pt={2}
     >
@@ -40,24 +40,6 @@ const MenuPage = () => {
       />
 
       <Box display="flex" justifyContent="center" gap={4}>
-        <Link to="/" style={{ textDecoration: 'none' }}>
-          <Paper
-            elevation={3}
-            sx={{
-              p: 3,
-              textAlign: 'center',
-              borderRadius: 3,
-              bgcolor: 'white',
-              '&:hover': { bgcolor: '#ddd' },
-              minWidth: '120px',
-            }}
-          >
-            <Home size={40} color="black" />
-            <Typography variant="h6" fontWeight="bold" color="black">
-              Home
-            </Typography>
-          </Paper>
-        </Link>
 
         <Link to="/history" style={{ textDecoration: 'none' }}>
           <Paper

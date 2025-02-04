@@ -71,7 +71,7 @@ const NavBar = () => {
           onKeyDown={handleDrawerToggle}
         >
           <List>
-            <ListItem component="li" onClick={() => handleNavigation('/')}>
+            <ListItem component="li" onClick={() => handleNavigation('/menu')}>
               <ListItemText primary="Home" sx={{ color: 'white' }} />
             </ListItem>
             <ListItem component="li" onClick={() => handleNavigation('/scan')}>
