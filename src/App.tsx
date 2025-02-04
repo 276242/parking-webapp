@@ -6,7 +6,8 @@ import NavBar from './menu-app-bar/NavBar';
 import LoginForm from './auth-form/LoginForm';
 import ParkingHistory from './parking-history/ParkingHistory';
 import ParkingDetails from './parking-details/ParkingDetails';
-import QRScanner from './qr-scanner/QRScanner';
+import QRScanner from './qr-scanner/QRScanner'; // fix the qr code
+
 
 function App() {
   return (
