@@ -1,31 +1,22 @@
-import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
-import ApiProvider from './api/ApiProvider';
-import { AuthProvider } from './auth-form/AuthContext';
-import NavBar from './menu-app-bar/NavBar';
-import LoginForm from './auth-form/LoginForm';
-import ParkingHistory from './parking-history/ParkingHistory';
-import ParkingDetails from './parking-details/ParkingDetails';
-import QRScanner from './qr-scanner/QRScanner';
-import MenuPage from './menu//MenuPage';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import AssignParking from "./pages/AssignParking";
+import ParkingSpots from "./pages/ParkingSpots";
+import NavBar from "./components/NavBar";
 
-function App() {
+const App = () => {
   return (
-    <ApiProvider>
-      <AuthProvider>
-          <NavBar />
-          <Routes>
-            <Route path="/login" element={<LoginForm />} />
-            <Route path="/history" element={<ParkingHistory />} />
-            <Route path="/details/:spotId" element={<ParkingDetails />} />
-            <Route path="/scan" element={<QRScanner />} />
-            <Route path="/menu" element={<MenuPage />} />
-            <Route path="/" element={<Navigate to="/login" />} />
-            <Route path="*" element={<h1>404 - Page Not Found</h1>} />
-          </Routes>
-      </AuthProvider>
-    </ApiProvider>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/assign-parking" element={<AssignParking />} />
+        <Route path="/parking-spots" element={<ParkingSpots />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
