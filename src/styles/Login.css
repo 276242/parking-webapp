@@ -1,0 +1,88 @@
+/* General Login Page Styling */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #000000, #333333);
+  }
+  
+  .login-card {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .login-title {
+    font-size: 28px;
+    color: #333333;
+    margin-bottom: 25px;
+    font-weight: 700;
+  }
+  
+  form {
+    width: 100%;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #555555;
+  }
+  
+  .form-group input {
+    width: 96%;
+    padding: 10px; 
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    background: #f9f9f9;
+    transition: all 0.3s;
+  }
+  
+  .form-group input:focus {
+    outline: none;
+    border-color: #000000;
+    background: #ffffff;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 10px; 
+    background-color: #000000;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+  }
+  
+  .login-button:hover {
+    background-color: #333333;
+    transform: scale(1.05);
+  }

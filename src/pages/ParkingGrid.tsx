@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllParkingSpots } from "../services/parkingSpotService";
 
+
 const ParkingGrid: React.FC = () => {
   const [spots, setSpots] = useState<any[]>([]);
   const [message, setMessage] = useState("");
