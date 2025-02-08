@@ -62,7 +62,7 @@ const ScanQR: React.FC = () => {
       }
       const response = await assignParkingSpot(Number(spotId.replace("QR", "")), Number(userId));
       postMessage(response.message || `Parking spot assigned: ${spotId}`);
-      setTimeout(() => navigate("/parking-spots"), 2000);
+      setTimeout(() => navigate("/parking-spots"), 100);
     } catch (error: any) {
       postMessage(error || "Failed to assign parking spot.");
     }

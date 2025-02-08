@@ -15,13 +15,26 @@ const NavBar: React.FC = () => {
     <nav style={styles.navbar}>
       <h1 style={styles.title}>Parking Spot Finder</h1>
       <div style={styles.navLinks}>
-        <Link to="/parking-spots" style={styles.link}>View Parking Spots</Link>
-        <Link to="/assign-parking" style={styles.link}>Assign Parking</Link>
-        <Link to="/scan-qr" style={styles.link}>Scan QR Code</Link>
+        <Link to="/parking-spots" style={styles.link}>
+          View Parking Spots (Admin)
+        </Link>
+        <Link to="/assign-parking" style={styles.link}>
+          Assign Parking
+        </Link>
+        <Link to="/scan-qr" style={styles.link}>
+          Scan QR Code
+        </Link>
+        <Link to="/parking-grid" style={styles.link}>
+          Parking Grid (User)
+        </Link>
         {token ? (
-          <button onClick={handleLogout} style={styles.logoutButton}>Logout</button>
+          <button onClick={handleLogout} style={styles.logoutButton}>
+            Logout
+          </button>
         ) : (
-          <Link to="/login" style={styles.link}>Login</Link>
+          <Link to="/login" style={styles.link}>
+            Login
+          </Link>
         )}
       </div>
     </nav>
