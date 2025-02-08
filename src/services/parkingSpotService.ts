@@ -82,20 +82,41 @@ export const getAllParkingSpots = async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) throw new Error("User not authenticated.");
-  
+
+
+
       const response = await axios.post(
         `${API_BASE_URL}/assign`,
-        { qrCode, userId },
+        { spotId: qrCode.replace("QR", ""), userId },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-  
+
       console.log(`Assigned QR Code: ${qrCode} to userId: ${userId}`);
       return response.data;
     } catch (error: any) {
       throw error.response?.data?.message || "Failed to assign parking spot.";
     }
   };  
+  
+  export const fetchParkingSpotDetails = async (qrCode: string) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("User not authenticated.");
+  
+      const response = await axios.get(
+        `http://localhost:8081/api/parkingspot/${qrCode}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error: any) {
+      throw error.response?.data?.message || "Failed to fetch parking spot details.";
+    }
+  };
   
   

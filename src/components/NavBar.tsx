@@ -118,18 +118,6 @@ const NavBar: React.FC = () => {
             </ListItem>
             <ListItem
               component="button"
-              onClick={() => handleNavigation("/assign-parking")}
-              sx={{
-                color: "white",
-                backgroundColor: "#222",
-                border: "none",
-                "&:hover": { backgroundColor: "#444" },
-              }}
-            >
-              <ListItemText primary="Assign Parking" />
-            </ListItem>
-            <ListItem
-              component="button"
               onClick={() => handleNavigation("/scan-qr")}
               sx={{
                 color: "white",
