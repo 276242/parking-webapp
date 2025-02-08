@@ -18,7 +18,7 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.userId);
       alert("Login successful!");
-      navigate("/parking-spots");
+      navigate("/parking-grid");
     } catch (err: any) {
       console.error("Login Error: ", err);
       setError(err.message || "Login failed.");

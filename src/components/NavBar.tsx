@@ -1,9 +1,28 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import {
+  AppBar,
+  Box,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Toolbar,
+  Typography,
+  Button,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import { useNavigate } from "react-router-dom";
 
 const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -11,65 +30,121 @@ const NavBar: React.FC = () => {
     navigate("/login");
   };
 
-  return (
-    <nav style={styles.navbar}>
-      <h1 style={styles.title}>Parking Spot Finder</h1>
-      <div style={styles.navLinks}>
-        <Link to="/parking-spots" style={styles.link}>
-          View Parking Spots (Admin)
-        </Link>
-        <Link to="/assign-parking" style={styles.link}>
-          Assign Parking
-        </Link>
-        <Link to="/scan-qr" style={styles.link}>
-          Scan QR Code
-        </Link>
-        <Link to="/parking-grid" style={styles.link}>
-          Parking Grid (User)
-        </Link>
-        {token ? (
-          <button onClick={handleLogout} style={styles.logoutButton}>
-            Logout
-          </button>
-        ) : (
-          <Link to="/login" style={styles.link}>
-            Login
-          </Link>
-        )}
-      </div>
-    </nav>
-  );
-};
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    setDrawerOpen(false);
+  };
 
-const styles = {
-  navbar: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "black",
-    padding: "15px",
-  },
-  title: {
-    color: "white",
-    fontSize: "20px",
-    fontWeight: "bold",
-  },
-  navLinks: {
-    display: "flex",
-    gap: "15px",
-  },
-  link: {
-    color: "white",
-    textDecoration: "none",
-    fontSize: "16px",
-  },
-  logoutButton: {
-    backgroundColor: "red",
-    color: "white",
-    border: "none",
-    padding: "8px 12px",
-    cursor: "pointer",
-  },
+  return (
+    <>
+      <AppBar position="static" sx={{ bgcolor: "black" }}>
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={handleDrawerToggle}
+            sx={{ color: "white" }}
+          >
+            <MenuIcon />
+          </IconButton>
+
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, textAlign: "center", color: "white" }}
+          >
+            Parking Spot Finder
+          </Typography>
+
+          {token ? (
+            <Button
+              onClick={handleLogout}
+              variant="text"
+              sx={{ color: "white" }}
+              startIcon={<AccountCircle />}
+            >
+              Logout
+            </Button>
+          ) : (
+            <Button
+              onClick={() => navigate("/login")}
+              variant="text"
+              sx={{ color: "white" }}
+              startIcon={<AccountCircle />}
+            >
+              Login
+            </Button>
+          )}
+        </Toolbar>
+      </AppBar>
+
+      <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerToggle}>
+        <Box
+          sx={{
+            width: 250,
+            bgcolor: "#222",
+            height: "100vh",
+          }}
+          role="presentation"
+          onClick={handleDrawerToggle}
+          onKeyDown={handleDrawerToggle}
+        >
+          <List>
+            <ListItem
+              component="button"
+              onClick={() => handleNavigation("/parking-grid")}
+              sx={{
+                color: "white",
+                backgroundColor: "#222",
+                border: "none",
+                "&:hover": { backgroundColor: "#444" },
+              }}
+            >
+              <ListItemText primary="Parking Grid (User)" />
+            </ListItem>
+            <ListItem
+              component="button"
+              onClick={() => handleNavigation("/parking-spots")}
+              sx={{
+                color: "white",
+                backgroundColor: "#222",
+                border: "none",
+                "&:hover": { backgroundColor: "#444" },
+              }}
+            >
+              <ListItemText primary="Parking Spots Console (Admin)" />
+            </ListItem>
+            <ListItem
+              component="button"
+              onClick={() => handleNavigation("/assign-parking")}
+              sx={{
+                color: "white",
+                backgroundColor: "#222",
+                border: "none",
+                "&:hover": { backgroundColor: "#444" },
+              }}
+            >
+              <ListItemText primary="Assign Parking" />
+            </ListItem>
+            <ListItem
+              component="button"
+              onClick={() => handleNavigation("/scan-qr")}
+              sx={{
+                color: "white",
+                backgroundColor: "#222",
+                border: "none",
+                "&:hover": { backgroundColor: "#444" },
+              }}
+            >
+              <ListItemText primary="Scan QR Code" />
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
+    </>
+  );
 };
 
 export default NavBar;
