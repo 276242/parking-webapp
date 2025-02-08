@@ -55,7 +55,7 @@ const NavBar: React.FC = () => {
             component="div"
             sx={{ flexGrow: 1, textAlign: "center", color: "white" }}
           >
-            Parking Spot Finder
+            Parking Web App
           </Typography>
 
           {token ? (
