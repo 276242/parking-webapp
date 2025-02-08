@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { login } from "../services/authService";
+import { useNavigate } from "react-router-dom";
 import "../styles/Login.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,6 +18,7 @@ const Login = () => {
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.userId);
       alert("Login successful!");
+      navigate("/parking-spots");
     } catch (err: any) {
       console.error("Login Error: ", err);
       setError(err.message || "Login failed.");
