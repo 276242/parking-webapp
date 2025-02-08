@@ -17,6 +17,7 @@ const NavBar: React.FC = () => {
       <div style={styles.navLinks}>
         <Link to="/parking-spots" style={styles.link}>View Parking Spots</Link>
         <Link to="/assign-parking" style={styles.link}>Assign Parking</Link>
+        <Link to="/scan-qr" style={styles.link}>Scan QR Code</Link>
         {token ? (
           <button onClick={handleLogout} style={styles.logoutButton}>Logout</button>
         ) : (

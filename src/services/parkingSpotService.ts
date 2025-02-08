@@ -77,4 +77,25 @@ export const getAllParkingSpots = async () => {
       throw error.response?.data?.message || "Failed to release parking spot.";
     }
   };
+
+  export const assignParkingByQR = async (qrCode: string, userId: number) => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) throw new Error("User not authenticated.");
+  
+      const response = await axios.post(
+        `${API_BASE_URL}/assign`,
+        { qrCode, userId },
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+  
+      console.log(`Assigned QR Code: ${qrCode} to userId: ${userId}`);
+      return response.data;
+    } catch (error: any) {
+      throw error.response?.data?.message || "Failed to assign parking spot.";
+    }
+  };  
+  
   
