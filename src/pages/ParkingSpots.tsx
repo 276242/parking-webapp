@@ -75,38 +75,93 @@ const ParkingSpots: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Parking Spots</h2>
-      {message && <p style={{ color: "red" }}>{message}</p>}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "10px" }}>
-        {spots.map((spot) => (
-          <div key={spot.id || spot.spotId}
-            style={{
-              padding: "5px",
-              border: "1px solid black",
-              backgroundColor: spot.isAvailable ? "green" : "red",
-              color: "white",
-              textAlign: "center",
-              fontSize: "12px",
-            }}
-          >
-            <p>Spot: {spot.spotNumber}</p>
-            <p>Level: {spot.level}</p>
-            <p>Sector: {spot.sector}</p>
-            <p>{spot.isAvailable ? "Available" : `Reserved by User ${spot.reservedBy}`}</p>
+    <div style={{ padding: "20px", maxWidth: "1200px", margin: "0 auto" }}>
+  <h2 style={{ textAlign: "center", marginBottom: "20px", fontSize: "24px", color: "#333" }}>
+    Parking Spots
+  </h2>
+  {message && (
+    <p style={{ color: "red", textAlign: "center", marginBottom: "20px" }}>{message}</p>
+  )}
+  <div
+    style={{
+      display: "grid",
+      gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+      gap: "20px",
+    }}
+  >
+    {spots.map((spot) => (
+      <div
+        key={spot.id || spot.spotId}
+        style={{
+          padding: "15px",
+          borderRadius: "8px",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          backgroundColor: spot.isAvailable ? "#e8f5e9" : "#ffebee",
+          textAlign: "center",
+          fontSize: "14px",
+        }}
+      >
+        <p style={{ fontWeight: "bold", marginBottom: "10px" }}>Spot: {spot.spotNumber}</p>
+        <p>Level: {spot.level}</p>
+        <p>Sector: {spot.sector}</p>
+        <p style={{ fontSize: "14px", color: spot.isAvailable ? "#388e3c" : "#d32f2f" }}>
+          {spot.isAvailable ? "Available" : `Reserved by User ${spot.reservedBy}`}
+        </p>
 
-            {spot.isAvailable && <button onClick={() => handleAssign(spot.id)}>Assign</button>}
-
-            {!spot.isAvailable && spot.reservedBy == userId && (
-              <button onClick={() => handleUnassign(spot.id)}>Unassign</button>
-            )}
-
-            {!spot.isAvailable && token && <button onClick={() => handleRelease(spot.id)}>Release (Admin)</button>}
-
-          </div>
-        ))}
+        <div style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "10px" }}>
+          {spot.isAvailable && (
+            <button
+              onClick={() => handleAssign(spot.id)}
+              style={{
+                backgroundColor: "#007bff",
+                color: "white",
+                border: "none",
+                padding: "10px 20px",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontSize: "14px",
+              }}
+            >
+              Assign
+            </button>
+          )}
+          {!spot.isAvailable && spot.reservedBy == userId && (
+            <button
+              onClick={() => handleUnassign(spot.id)}
+              style={{
+                backgroundColor: "#ffc107",
+                color: "black",
+                border: "none",
+                padding: "10px 20px",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontSize: "14px",
+              }}
+            >
+              Unassign
+            </button>
+          )}
+          {!spot.isAvailable && token && (
+            <button
+              onClick={() => handleRelease(spot.id)}
+              style={{
+                backgroundColor: "#d32f2f",
+                color: "white",
+                border: "none",
+                padding: "10px 20px",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontSize: "14px",
+              }}
+            >
+              Release (Admin)
+            </button>
+          )}
+        </div>
       </div>
-    </div>
+    ))}
+  </div>
+</div>
   );
 };
 
