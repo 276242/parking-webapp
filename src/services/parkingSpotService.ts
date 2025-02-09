@@ -48,17 +48,20 @@ export const getAllParkingSpots = async () => {
       if (!token) throw new Error("User not authenticated.");
   
       const response = await axios.post(
-        `${API_BASE_URL}/unassign`,
+        `${API_BASE_URL}/self-unassign`,
         { spotId, userId },
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      console.log(`Unassigned spotId: ${spotId} by userId: ${userId}`);
       return response.data;
     } catch (error: any) {
+      console.error(`Failed to unassign spotId: ${spotId} by userId: ${userId}`);
       throw error.response?.data?.message || "Failed to unassign parking spot.";
     }
   };
+  
   
   export const releaseParkingSpot = async (spotId: number) => {
     try {

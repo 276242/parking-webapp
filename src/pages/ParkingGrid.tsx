@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getAllParkingSpots } from "../services/parkingSpotService";
+import { getAllParkingSpots, unassignParkingSpot } from "../services/parkingSpotService";
 
 const ParkingGrid: React.FC = () => {
   const [spots, setSpots] = useState<any[]>([]);
   const [message, setMessage] = useState("");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     fetchSpots();
@@ -15,6 +16,19 @@ const ParkingGrid: React.FC = () => {
       setSpots(data);
     } catch (err: any) {
       setMessage("Failed to load parking spots.");
+    }
+  };
+
+  const handleUnassign = async (spotId: number) => {
+    try {
+      if (!userId) {
+        setMessage("You need to log in to unassign a spot.");
+        return;
+      }
+      await unassignParkingSpot(spotId, Number(userId));
+      fetchSpots();
+    } catch (err: any) {
+      setMessage(err.message || "Failed to unassign parking spot.");
     }
   };
 
@@ -57,6 +71,22 @@ const ParkingGrid: React.FC = () => {
                 transform: "translateX(-50%)",
               }}
             ></div>
+              {!spot.isAvailable && spot.reservedBy == userId && (
+                <button
+                  onClick={() => handleUnassign(spot.id)}
+                  style={{
+                    marginTop: "10px",
+                    backgroundColor: "orange",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "5px",
+                    padding: "5px 10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Unassign
+                </button>
+              )}
           </div>
         ))}
       </div>

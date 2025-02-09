@@ -79,7 +79,6 @@ const ScanQR: React.FC = () => {
         return;
       }
       await assignParkingByQR(qrCode, Number(userId));
-      alert(`Parking spot assigned: ${qrCode}`);
       navigate("/parking-grid");
       setOpenModal(false);
     } catch (err) {
