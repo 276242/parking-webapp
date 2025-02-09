@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const handleDrawerToggle = () => {
@@ -27,6 +28,7 @@ const NavBar: React.FC = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    localStorage.removeItem("role");
     navigate("/login");
   };
 
@@ -88,10 +90,22 @@ const NavBar: React.FC = () => {
             height: "100vh",
           }}
           role="presentation"
-          onClick={handleDrawerToggle}
-          onKeyDown={handleDrawerToggle}
         >
           <List>
+            {role === "ROLE_ADMIN" && (
+              <ListItem
+                component="button"
+                onClick={() => handleNavigation("/parking-console")}
+                sx={{
+                  color: "white",
+                  backgroundColor: "#222",
+                  border: "none",
+                  "&:hover": { backgroundColor: "#444" },
+                }}
+              >
+                <ListItemText primary="Parking Spots Console (Admin)" />
+              </ListItem>
+            )}
             <ListItem
               component="button"
               onClick={() => handleNavigation("/parking-grid")}
@@ -102,19 +116,7 @@ const NavBar: React.FC = () => {
                 "&:hover": { backgroundColor: "#444" },
               }}
             >
-              <ListItemText primary="Parking Grid (User)" />
-            </ListItem>
-            <ListItem
-              component="button"
-              onClick={() => handleNavigation("/parking-spots")}
-              sx={{
-                color: "white",
-                backgroundColor: "#222",
-                border: "none",
-                "&:hover": { backgroundColor: "#444" },
-              }}
-            >
-              <ListItemText primary="Parking Spots Console (Admin)" />
+              <ListItemText primary="Parking Grid" />
             </ListItem>
             <ListItem
               component="button"

@@ -17,7 +17,6 @@ const Login = () => {
       const data = await login(username, password);
       localStorage.setItem("token", data.token);
       localStorage.setItem("userId", data.userId);
-      alert("Login successful!");
       navigate("/parking-grid");
     } catch (err: any) {
       console.error("Login Error: ", err);

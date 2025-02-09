@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllParkingSpots, assignParkingSpot, unassignParkingSpot, releaseParkingSpot } from "../services/parkingSpotService";
 
-const ParkingSpots: React.FC = () => {
+const ParkingConsole: React.FC = () => {
   const [spots, setSpots] = useState<any[]>([]);
   const [message, setMessage] = useState("");
   const userId = localStorage.getItem("userId");
@@ -165,4 +165,4 @@ const ParkingSpots: React.FC = () => {
   );
 };
 
-export default ParkingSpots;
+export default ParkingConsole;
