@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
+import ParkingSpots from "./pages/ParkingConsole";
 import ParkingGrid from "./pages/ParkingGrid";
 import NavBar from "./components/NavBar";
 import ScanQR from "./pages/ScanQR";
-import ParkingConsole from "./pages/ParkingConsole";
 
 const App = () => {
   const role = localStorage.getItem("role");
@@ -16,7 +16,7 @@ const App = () => {
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         {role === "ROLE_ADMIN" ? (
-        <Route path="/parking-console" element={<ParkingConsole />} />
+        <Route path="/parking-console" element={<ParkingSpots />} />
         ) : (
         <Route path="/parking-console" element={<Navigate to="/parking-grid" />} />
         )}
